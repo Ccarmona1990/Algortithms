@@ -1,0 +1,1309 @@
+[1mdiff --git a/Algorithms/src/Arrays1D.js b/Algorithms/src/Arrays1D.js[m
+[1mdeleted file mode 100644[m
+[1mindex f6a803d..0000000[m
+[1m--- a/Algorithms/src/Arrays1D.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,257 +0,0 @@[m
+[31m-[m
+[31m-class Arrays1D{[m
+[31m-    isWhole(n){[m
+[31m-        const isDivisibleByOne = n % 1 === 0;[m
+[31m-        return isDivisibleByOne;[m
+[31m-    }[m
+[31m-    isPrime(n){[m
+[31m-        const isNumberOne = n == 1;[m
+[31m-        const isNumberNegativeOne = n == 1;[m
+[31m-    if (isNumberOne || isNumberNegativeOne){[m
+[31m-        return false;[m
+[31m-    }[m
+[31m-    if (n > 2){[m
+[31m-        for (let i = 2; i < n; i++){[m
+[31m-            const isDivisibleByOtherNumbers = n % i == 0;[m
+[31m-            if (isDivisibleByOtherNumbers){[m
+[31m-                return false;[m
+[31m-            }[m
+[31m-        }[m
+[31m-    }[m
+[31m-    if (n < -2){[m
+[31m-        for (let j = -2; j > n; j--){[m
+[31m-            const isDivisibleByOtherNumbers = n % j == 0;[m
+[31m-            if (isDivisibleByOtherNumbers){[m
+[31m-                return false;[m
+[31m-            }[m
+[31m-        }[m
+[31m-    }[m
+[31m-    return typeof(n) == 'number';[m
+[31m-    }[m
+[31m-    isTwoDigits(n){[m
+[31m-        const isTwoPositiveDigits = n < 100 && n > 9;[m
+[31m-        const isTwoNegativeDigits = n > -100 && n < -9; [m
+[31m-        return isTwoPositiveDigits || isTwoNegativeDigits;[m
+[31m-    }[m
+[31m-    isPair(n){[m
+[31m-        const isDivisibleByTwo = n % 2 === 0;[m
+[31m-        return isDivisibleByTwo[m
+[31m-    }[m
+[31m-    isNotAnArray(arr){[m
+[31m-        const isNotAnArray = !arr[0];[m
+[31m-        if(isNotAnArray){[m
+[31m-            throw new Error(`Please insert an array or add values to the array`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotAnArrayOfNumbers(arr){[m
+[31m-        if(typeof(arr[0]) !== 'number'){[m
+[31m-            throw new Error ('Please enter an array of numbers only')[m
+[31m-        }[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 1[m
+[31m-    // Determine the position of the highest number on an array[m
+[31m-    highestNumber(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let acc = 1;[m
+[31m-        let indx = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let number = arr[i]; [m
+[31m-            const isHighest = number > acc;[m
+[31m-            if(isHighest){[m
+[31m-                acc = number;[m
+[31m-                indx = Number(i);[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {[m
+[31m-            number: acc,[m
+[31m-            index: indx[m
+[31m-        }[m
+[31m-    }[m
+[31m-    // Exercise 2[m
+[31m-    // Determine the position of the highest pair on an array[m
+[31m-    highestPair(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let acc = 1;[m
+[31m-        let index = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let number =arr[i][m
+[31m-            const isHighest = number > acc;[m
+[31m-            const isPair = number%2==0[m
+[31m-            if(isHighest && isPair){[m
+[31m-                acc = number;[m
+[31m-                index = Number(i);[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {[m
+[31m-            value: acc,[m
+[31m-            index: index[m
+[31m-        }[m
+[31m-    }[m
+[31m-    // Exercise 3[m
+[31m-    // Determine the position of the highest prime number on an array[m
+[31m-    highestPrime(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let acc = 1;[m
+[31m-        let index = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let number = arr[i];[m
+[31m-            const isHighest = number > acc;[m
+[31m-            if(isHighest && this.isPrime(number)){[m
+[31m-                acc = number;[m
+[31m-                index = Number(i);[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {[m
+[31m-            value: acc,[m
+[31m-            index: index[m
+[31m-        }[m
+[31m-    }[m
+[31m-    // Exercise 4[m
+[31m-    // Place in an array the first 10 element from the fibonacci serie[m
+[31m-    showFibonacciSerie(){[m
+[31m-        let arr = [];[m
+[31m-        let temp1 = 1;[m
+[31m-        let temp2;[m
+[31m-        let f = 0;[m
+[31m-        for(let i = 0;i<10;i++){[m
+[31m-            temp2 = f;[m
+[31m-            f += temp1 ;[m
+[31m-            temp1 = temp2;[m
+[31m-            arr.push(temp1);[m
+[31m-        }[m
+[31m-        return `${arr}`;[m
+[31m-    }[m
+[31m-    // Exercise 5[m
+[31m-    // Create an array of 10 prime number comprehended between 100 and 300[m
+[31m-    primes100to300(){[m
+[31m-        let arr = [];[m
+[31m-        for(let i =100; i<300;i++){[m
+[31m-            const numberOfItemsToAdd= arr.length<10;[m
+[31m-            if(this.isPrime(i)&& numberOfItemsToAdd){[m
+[31m-                arr.push(i)[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return `${arr}`;[m
+[31m-    }[m
+[31m-    // Exercise 6[m
+[31m-    // Read 2 whole numbers and add to an array all prime numbers between the lowest and the highest[m
+[31m-    primesNtoN(n1,n2){[m
+[31m-        const eitherIsNegative = (n1 < 0 && n2 > 0) || (n2 < 0 && n1 > 0);[m
+[31m-        if(eitherIsNegative){[m
+[31m-            throw new Error('Please make sure both numbers are either positive or Negative')[m
+[31m-        }[m
+[31m-        const isNotANumber = typeof(n1) !== 'number' || typeof(n2) !== 'number';[m
+[31m-        if(isNotANumber){[m
+[31m-            throw new Error ('Please enter a number')[m
+[31m-        }[m
+[31m-        if (n1>n2){[m
+[31m-            [n2,n1]=[n1,n2][m
+[31m-        }[m
+[31m-        let arr = [];[m
+[31m-        for(let i=n1;i<n2;i++){[m
+[31m-            const numberOfItemsToAdd= arr.length<10;[m
+[31m-            if(this.isPrime(i) && numberOfItemsToAdd){[m
+[31m-                arr.push(i)[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return `${arr}`;[m
+[31m-    }[m
+[31m-    // Exercise 7[m
+[31m-    // Determine in which position are the numbers that end in 4[m
+[31m-    lastIsFour(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let objArr = [][m
+[31m-        for(let index in arr){[m
+[31m-            let number = arr[index][m
+[31m-            const remainderIsFour = number%10==4;[m
+[31m-            if(remainderIsFour){[m
+[31m-                objArr.push({[m
+[31m-                    number: number,[m
+[31m-                    index: Number(index)[m
+[31m-                })[m
+[31m-            }        [m
+[31m-        }[m
+[31m-        return objArr[m
+[31m-    }[m
+[31m-    // Exercise 8[m
+[31m-    // Determine how many times the highest number is repeated[m
+[31m-    highestIsRepeated(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let counter = 0;[m
+[31m-        let acc = 1;[m
+[31m-        let obj = {};[m
+[31m-        for(let i in arr){[m
+[31m-            let number = arr[i];[m
+[31m-            const isHighest = number>=acc;[m
+[31m-            if(isHighest){[m
+[31m-                acc = number;[m
+[31m-                if(!obj[acc]){[m
+[31m-                    obj[acc] = 1[m
+[31m-                } else {[m
+[31m-                    obj[acc] += 1[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        for (let value in obj){[m
+[31m-            let key = obj[value][m
+[31m-            if (key > counter){[m
+[31m-                counter = key[m
+[31m-            }[m
+[31m-        }[m
+[31m-        //console.log(acc);[m
+[31m-        return counter == 1? 'Highest is not repeated': counter;[m
+[31m-    }[m
+[31m-    // Exercise 9[m
+[31m-    // Determine the position of numbers that contains 3 digits[m
+[31m-    threeDigitsAreAt(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let objArr = [];[m
+[31m-        let str = '';[m
+[31m-        for(let index in arr){[m
+[31m-            let number = arr[index];[m
+[31m-            const hasThreeDigits = number > 99 && number < 1000 || number < -99 && number > -1000 ;[m
+[31m-            if(hasThreeDigits){[m
+[31m-                objArr.push({[m
+[31m-                    Number: number,[m
+[31m-                    Index: Number(index)[m
+[31m-                })[m
+[31m-            }[m
+[31m-        }[m
+[31m-        for (let i in objArr){[m
+[31m-            let obj = objArr[i];[m
+[31m-            for (let j in obj){[m
+[31m-                let value = obj[j];[m
+[31m-                if(j == 'Index'){[m
+[31m-                    //console.log(value);[m
+[31m-                    str += value + ' '[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        //objArr[m
+[31m-        return str.trim()[m
+[31m-    }[m
+[31m-    // Exercise 10[m
+[31m-    // Determine how many numbers on the array are less than 3 digits[m
+[31m-    lessThanThreeDigits(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        let counter = 0;[m
+[31m-        for(let indx in arr){[m
+[31m-            let number = arr[indx];[m
+[31m-            const hasLessThanThreeDigits = number > -100 && number < 100;[m
+[31m-            if(hasLessThanThreeDigits){[m
+[31m-                counter++[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter;[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-export default Arrays1D;[m
+\ No newline at end of file[m
+[1mdiff --git a/Algorithms/src/Arrays2D.js b/Algorithms/src/Arrays2D.js[m
+[1mdeleted file mode 100644[m
+[1mindex ef42845..0000000[m
+[1m--- a/Algorithms/src/Arrays2D.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,269 +0,0 @@[m
+[31m-[m
+[31m-[m
+[31m-class Arrays2D{[m
+[31m-    isWhole(n){[m
+[31m-        const isDivisibleByOne = n % 1 === 0;[m
+[31m-        return isDivisibleByOne;[m
+[31m-    }[m
+[31m-    isPrime(n){[m
+[31m-        const isNumberOne = n == 1;[m
+[31m-        const isNumberNegativeOne = n == 1;[m
+[31m-    if (isNumberOne || isNumberNegativeOne){[m
+[31m-        return false;[m
+[31m-    }[m
+[31m-[m
+[31m-    for (let i = 2; i < n; i++){[m
+[31m-        const isDivisibleByOtherNumbers = n % i == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    for (let j = -2; j > n; j--){[m
+[31m-        const isDivisibleByOtherNumbers = n % j == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    return typeof(n) == 'number';[m
+[31m-    }[m
+[31m-    isTwoDigits(n){[m
+[31m-        const isTwoPositiveDigits = n < 100 && n > 9;[m
+[31m-        const isTwoNegativeDigits = n > -100 && n < -9; [m
+[31m-        return isTwoPositiveDigits || isTwoNegativeDigits;[m
+[31m-    }[m
+[31m-    isPair(n){[m
+[31m-        const isDivisibleByTwo = n%2 == 0;[m
+[31m-        return isDivisibleByTwo[m
+[31m-    }[m
+[31m-    isNotAnArray(arr){[m
+[31m-        const isNotAnArray = !arr[0];[m
+[31m-        if(isNotAnArray){[m
+[31m-            throw new Error(`Please insert an array or add values to the array`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotA2DimensionalArray(arr){[m
+[31m-        const isNotA2DimensionalArray = arr[[]] == false;[m
+[31m-        if(isNotA2DimensionalArray){[m
+[31m-            throw new Error ('Please insert a matrix / 2 dimensional Array');[m
+[31m-        }[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-    }[m
+[31m-    isNotA2DimensionalArrayOfNumbers(arr){[m
+[31m-        if(typeof(arr[0][0]) !== 'number'){[m
+[31m-            throw new Error ('Please enter an array of numbers only')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    // Exercise 1[m
+[31m-    // Determine the position of the higest number on a 2D array[m
+[31m-    highestNumber(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let row = 0;[m
+[31m-        let number = 0;[m
+[31m-        let index = '';[m
+[31m-        for(let rIndex in arr){[m
+[31m-            row = arr[rIndex][m
+[31m-            for(let cIndex in row){[m
+[31m-                number = row[cIndex];[m
+[31m-                const isGreaterThanAccumulator = number > acc;[m
+[31m-                if(isGreaterThanAccumulator){[m
+[31m-                    acc = number;[m
+[31m-                    index = `row= ${rIndex}, Column= ${cIndex}`[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {highest: acc, index}[m
+[31m-    }[m
+[31m-    // Exercise 2[m
+[31m-    // Determine the position of the highest pair on a 2D array[m
+[31m-    highestPair(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let index = '';[m
+[31m-        let row = 0 ;[m
+[31m-        let number = 0;[m
+[31m-        for(let rIndex in arr){[m
+[31m-            row = arr[rIndex][m
+[31m-            for(let cIndex in row){[m
+[31m-                number = row[cIndex];[m
+[31m-                const isGreaterThanAccumulator = number > acc;[m
+[31m-                if(isGreaterThanAccumulator && this.isPair(number)){[m
+[31m-                    acc = number;[m
+[31m-                    index = `row= ${rIndex}, Column= ${cIndex}`[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {highestNumber: acc, index}[m
+[31m-    }[m
+[31m-    // Exercise 3[m
+[31m-    // Determine the position of the all pairs on a 2D array[m
+[31m-    allPairs(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let row = 0;[m
+[31m-        let number = 0;[m
+[31m-        let index = '';[m
+[31m-        for(let rIndex in arr){[m
+[31m-            row = arr[rIndex][m
+[31m-            for(let cIndex in row){[m
+[31m-                number = row[cIndex];[m
+[31m-                if(this.isPair(number)){[m
+[31m-                    index += `row: ${rIndex}, Column: ${cIndex}` + ';';[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return index[m
+[31m-    }[m
+[31m-    // Exercise 4[m
+[31m-    // Determine the position of the all prime on a 2D array[m
+[31m-    allPrime(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let row = 0;[m
+[31m-        let number = 0;[m
+[31m-        let index = '';[m
+[31m-        for(let rIndex in arr){[m
+[31m-            row = arr[rIndex][m
+[31m-            for(let cIndex in row){[m
+[31m-                number = row[cIndex];[m
+[31m-                if(this.isPrime(number)){[m
+[31m-                    index += `row: ${rIndex}, Column: ${cIndex}; `;[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return index[m
+[31m-    }[m
+[31m-    // Exercise 5[m
+[31m-    // Calculate the sum total of elements at each array and determine which array has the highest sum[m
+[31m-    highestSum(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let index = 0;[m
+[31m-        let totalSum = 0;[m
+[31m-        let acc = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i][m
+[31m-            for(let n of arrs){[m
+[31m-                totalSum += n;[m
+[31m-            }[m
+[31m-            if(totalSum > acc){[m
+[31m-                acc = totalSum;[m
+[31m-                index = Number(i);[m
+[31m-            }[m
+[31m-            totalSum = 0[m
+[31m-        }[m
+[31m-        return {[m
+[31m-            Highest_Sum : acc,[m
+[31m-            Index : index[m
+[31m-        }[m
+[31m-    }[m
+[31m-    // Exercise 6[m
+[31m-    // Calculate the average of the highest number in each row on a 2D array[m
+[31m-    averageOfHighest(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let average = 0;[m
+[31m-        let highestNumbers = 0;[m
+[31m-        let acc = 0;[m
+[31m-        for(let arrs of arr){[m
+[31m-            for(let number of arrs){[m
+[31m-                if(number > acc){[m
+[31m-                    acc = number;[m
+[31m-                }[m
+[31m-            }[m
+[31m-            highestNumbers += acc;[m
+[31m-            acc = 0[m
+[31m-        }[m
+[31m-        average = highestNumbers / arr.length;[m
+[31m-        return average;[m
+[31m-    }[m
+[31m-    // Exercise 7[m
+[31m-    // Determine the position of numbers ended in 0[m
+[31m-    lastIsZero(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let index = '';[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i];[m
+[31m-            for(let j in arrs){[m
+[31m-                let number = arrs[j];[m
+[31m-                const numberEndsInZero = number%10 == 0;[m
+[31m-                if(numberEndsInZero){[m
+[31m-                    index += `Row: ${i}, Column: ${j}; `[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return index;[m
+[31m-    }[m
+[31m-    // Exercise 8[m
+[31m-    // Determine how many numbers end in 0[m
+[31m-    howManyEndInZero(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i];[m
+[31m-            for(let j in arrs){[m
+[31m-                let number = arrs[j];[m
+[31m-                const numberEndsInZero = number%10 == 0;[m
+[31m-                if(numberEndsInZero){[m
+[31m-                    counter++[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter;[m
+[31m-    }[m
+[31m-    // Exercise 9[m
+[31m-    // Determine how many numbers are prime and end in 3[m
+[31m-    primeAndThree(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i];[m
+[31m-            for(let j in arrs){[m
+[31m-                let number = arrs[j];[m
+[31m-                const NumberEndsInThree = number%10 == 3;[m
+[31m-                if(this.isPrime(number) && NumberEndsInThree){[m
+[31m-                    counter++[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter;[m
+[31m-    }[m
+[31m-    // Exercise 10[m
+[31m-    // Determine the index of the highest prime[m
+[31m-    highestPrime(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-        let index = '';[m
+[31m-        let acc = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i];[m
+[31m-            for(let j in arrs){[m
+[31m-                let number = arrs[j];[m
+[31m-                const isGreaterThanAccumulator = number > acc;[m
+[31m-                if(this.isPrime(number) && isGreaterThanAccumulator){[m
+[31m-                    acc = number;[m
+[31m-                    index = `Row= ${i}, Column= ${j}`[m
+[31m-                    [m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {highestPrime: acc, index};[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-export default Arrays2D;[m
+[1mdiff --git a/Algorithms/src/Decisions.js b/Algorithms/src/Decisions.js[m
+[1mdeleted file mode 100644[m
+[1mindex 58c2f38..0000000[m
+[1m--- a/Algorithms/src/Decisions.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,150 +0,0 @@[m
+[31m-[m
+[31m-class Decisions{[m
+[31m-    isWhole(n){[m
+[31m-        const isDivisibleByOne = n % 1 === 0;[m
+[31m-        return isDivisibleByOne;[m
+[31m-    }[m
+[31m-    isPrime(n){[m
+[31m-        const isNumberOne = n == 1;[m
+[31m-        const isNumberNegativeOne = n == 1;[m
+[31m-    if (isNumberOne || isNumberNegativeOne){[m
+[31m-        return false;[m
+[31m-    }[m
+[31m-[m
+[31m-    for (let i = 2; i < n; i++){[m
+[31m-        const isDivisibleByOtherNumbers = n % i == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    for (let j = -2; j > n; j--){[m
+[31m-        const isDivisibleByOtherNumbers = n % j == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    return typeof(n) == 'number';[m
+[31m-    }[m
+[31m-    isTwoDigits(n){[m
+[31m-        const isTwoPositiveDigits = (n < 100 && n > 9);[m
+[31m-        const isTwoNegativeDigits = (n > -100 && n < -9) ;[m
+[31m-        return isTwoPositiveDigits || isTwoNegativeDigits;[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 1[m
+[31m-    // A method to determine if the last digit of a number is equal to 4[m
+[31m-    isLastDigitFour (n){[m
+[31m-        if(this.isWhole(n)){[m
+[31m-            const lastDigitIsFour = n % 10 === 4 || n % 10 === -4;[m
+[31m-            return lastDigitIsFour;[m
+[31m-        } else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 2[m
+[31m-    // A method to determine if a number is isWhole and has 3 digits [m
+[31m-    isTripleDigits(n){[m
+[31m-        if(this.isWhole(n)){[m
+[31m-            const hasThreeDigits = (n < 1000 && n > 99) || (n > -1000 && n < -99);[m
+[31m-            return hasThreeDigits;[m
+[31m-        }else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 3[m
+[31m-    // A method to determine if a number is both  are Whole and Negative[m
+[31m-    isNegative(n){[m
+[31m-        if(this.isWhole(n)){[m
+[31m-            const isNegative = n < 0;[m
+[31m-            return isNegative;[m
+[31m-        } else{[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 4[m
+[31m-    // A method to determine the sum of its two digits[m
+[31m-    wholeSum(n){[m
+[31m-        if (this.isWhole(n) && this.isTwoDigits(n)) {[m
+[31m-            const firstDigit = ~~(n / 10);[m
+[31m-            const lastDigit = (n % 10);[m
+[31m-            return ~~(firstDigit + lastDigit);[m
+[31m-        } else{[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-[m
+[31m-}[m
+[31m-    // Exercise 5[m
+[31m-    // A method to determine if both digits are pair from a 2 digit number[m
+[31m-    isPair(n){[m
+[31m-        if(this.isWhole(n) && this.isTwoDigits(n) ){[m
+[31m-            const firstDigit = ~~(n / 10);[m
+[31m-            const secondDigit = (n % 10);[m
+[31m-            const firstDigitIsPair = firstDigit % 2 === 0;[m
+[31m-            const secondDigitIsPair = secondDigit % 2 === 0;[m
+[31m-            const bothPair = firstDigitIsPair && secondDigitIsPair;[m
+[31m-            return bothPair; [m
+[31m-        } else{[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 6[m
+[31m-    // A method to determine which 2 digits numbers are isPrime below 20[m
+[31m-    isPrimeBetween10and20(n){[m
+[31m-        if(this.isWhole(n) && this.isPrime(n)){[m
+[31m-            const between10and20 = (n > -20 && n < -9) || (n < 20 && n > 9) ;[m
+[31m-            return between10and20;[m
+[31m-        } else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 7[m
+[31m-    // A method to determine if a 2 digit number is both isPrime and isNegative[m
+[31m-    isPrimeNegative(n) {[m
+[31m-        if(this.isWhole(n) && this.isPrime(n)){[m
+[31m-            const hasTwoNegativeDigits = n < -9 && n > -100;[m
+[31m-            return hasTwoNegativeDigits;[m
+[31m-        } else{[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 8[m
+[31m-    // A method to determine if both numbers are multiple of each other[m
+[31m-    isMultiplicable(n){[m
+[31m-        if(this.isWhole(n) && this.isTwoDigits(n)){[m
+[31m-            const firstDigit = ~~(n / 10);[m
+[31m-            const secondDigit = (n % 10);[m
+[31m-            const isFirstDigitMultipleOfSecondDigit = (firstDigit % secondDigit) == 0;[m
+[31m-            const isSecondDigitMultipleOfFirstDigit = (secondDigit % firstDigit) == 0;[m
+[31m-            const multiple = isFirstDigitMultipleOfSecondDigit || isSecondDigitMultipleOfFirstDigit;[m
+[31m-            return multiple;[m
+[31m-        } else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 9[m
+[31m-    // A method to determine both numbers are isPrime in a two digit number[m
+[31m-    isBothPrime(n){[m
+[31m-        if(this.isWhole(n) && this.isTwoDigits(n)){[m
+[31m-            const firstDigit = ~~(n / 10);[m
+[31m-            const secondDigit = (n % 10);[m
+[31m-            const bothPrime = this.isPrime(firstDigit) && this.isPrime(secondDigit);[m
+[31m-            return bothPrime;[m
+[31m-        } else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-    // Exercise 10[m
+[31m-    // A method to determine if 2 digits are the same from a 2 digit number[m
+[31m-    isSameDigit(n){[m
+[31m-        if(this.isWhole(n) && this.isTwoDigits(n)){[m
+[31m-            const firstDigit = ~~(n / 10);[m
+[31m-            const secondDigit = (n % 10);[m
+[31m-            const sameDigit = firstDigit - secondDigit == 0;[m
+[31m-            return sameDigit;[m
+[31m-        } else {[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-}[m
+[31m-};[m
+[31m-[m
+[31m-export default Decisions;[m
+[1mdiff --git a/Algorithms/src/Functions.js b/Algorithms/src/Functions.js[m
+[1mdeleted file mode 100644[m
+[1mindex f5d8c3b..0000000[m
+[1m--- a/Algorithms/src/Functions.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,267 +0,0 @@[m
+[31m-[m
+[31m-class Functions {[m
+[31m-[m
+[31m-    isWhole(n){[m
+[31m-        const isDivisibleByOne = n % 1 === 0;[m
+[31m-        return isDivisibleByOne;[m
+[31m-    }[m
+[31m-    isPrime(n){[m
+[31m-        const isNumberOne = n == 1;[m
+[31m-        const isNumberNegativeOne = n == 1;[m
+[31m-    if (isNumberOne || isNumberNegativeOne){[m
+[31m-        return false;[m
+[31m-    }[m
+[31m-[m
+[31m-    for (let i = 2; i < n; i++){[m
+[31m-        const isDivisibleByOtherNumbers = n % i == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    for (let j = -2; j > n; j--){[m
+[31m-        const isDivisibleByOtherNumbers = n % j == 0;[m
+[31m-        if (isDivisibleByOtherNumbers){[m
+[31m-            return false;[m
+[31m-        }[m
+[31m-    }[m
+[31m-    return typeof(n) == 'number';[m
+[31m-    }[m
+[31m-    isNotPositive(n){[m
+[31m-        const isNegative = n<0;[m
+[31m-        if(isNegative){[m
+[31m-            throw new Error('Please enter a positive number')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotANumber(n){[m
+[31m-        if (typeof(n) !== 'number'){[m
+[31m-            throw new Error('Please enter a number')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotAnArray(arr){[m
+[31m-        const isNotAnArray = !arr[0];[m
+[31m-        if(isNotAnArray){[m
+[31m-            throw new Error(`Please insert an array or add values to the array`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotAnArrayOfNumbers(arr){[m
+[31m-        if(typeof(arr[0]) !== 'number'){[m
+[31m-            throw new Error ('Please enter an array of numbers only')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    isNotA2DimensionalArray(arr){[m
+[31m-        const isNotA2DimensionalArray = arr[[]] == false;[m
+[31m-        if(isNotA2DimensionalArray){[m
+[31m-            throw new Error ('Please insert a matrix / 2 dimensional Array');[m
+[31m-        }[m
+[31m-        this.isNotA2DimensionalArrayOfNumbers(arr);[m
+[31m-    }[m
+[31m-    isNotA2DimensionalArrayOfNumbers(arr){[m
+[31m-        if(typeof(arr[0][0]) !== 'number'){[m
+[31m-            throw new Error ('Please enter a 2D array of numbers only')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    [m
+[31m-    //Exercise 1[m
+[31m-    // Create a function that takes an array and a number and return the number of times that a number ends in that number[m
+[31m-    howManyTimesLastIsN (arr, num){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotAnArrayOfNumbers(arr);[m
+[31m-        this.isNotANumber(num);[m
+[31m-        this.isNotPositive(num);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let number = arr[i];[m
+[31m-            let endsInNum = number % 10 == num; [m
+[31m-            if (endsInNum){[m
+[31m-                counter++;[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter[m
+[31m-    }[m
+[31m-    //Exercise 2[m
+[31m-    // Create a function that takes a 2D array and a number and returns the number of times a number has that digit located before last [m
+[31m-    howManyTimesBeforeLastIsN (arr, num){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotANumber(num);[m
+[31m-        this.isNotPositive(num);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i in arr){[m
+[31m-            let arrs = arr[i];[m
+[31m-            for(let number of arrs){[m
+[31m-                const isMoreThanTwoDigits = number > 99;[m
+[31m-                let secondDigit = ~~((number % 100) /10) [m
+[31m-                let endsInNum = secondDigit == num;[m
+[31m-                //console.log(number);[m
+[31m-                if (endsInNum && isMoreThanTwoDigits){[m
+[31m-                    counter++;[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter[m
+[31m-    }[m
+[31m-[m
+[31m-    //Exercise 3[m
+[31m-    // Create a function that takes a 2D array and returns the number of times the highest number on the array repeats itself[m
+[31m-    howMuchisHighestRepeated(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let counter = 0;[m
+[31m-        for(let i of arr){[m
+[31m-            for(let j of i){[m
+[31m-                let highestNumber = j > acc;[m
+[31m-                if (j == acc){[m
+[31m-                    counter++[m
+[31m-                } [m
+[31m-                if(highestNumber){[m
+[31m-                    acc = j;[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter == 0 ? 'Highest is not repeated' : counter[m
+[31m-    }[m
+[31m-    //Exercise 4[m
+[31m-    // Create a function that takes a 2D array and returns how many numbers are prime on the array[m
+[31m-    howManyArePrime(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i of arr){[m
+[31m-            for(let j of i){[m
+[31m-                if(this.isPrime(j)){[m
+[31m-                    counter++[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter[m
+[31m-    }[m
+[31m-    //Exercise 5[m
+[31m-    // Create a function that takes a 2D array and returns how many time is the highest prime repeated on the array[m
+[31m-    howMuchIsHighestPrimeRepeated(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let counter = 0;[m
+[31m-        for(let i of arr){[m
+[31m-            for(let j of i){[m
+[31m-                let highestNumber = j > acc;[m
+[31m-                if (j == acc){[m
+[31m-                    counter++[m
+[31m-                } [m
+[31m-                if(highestNumber && this.isPrime(j)){[m
+[31m-                    acc = j;[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter == 0 ? 'Highest is not repeated' : counter[m
+[31m-    }[m
+[31m-    // Exercise 6[m
+[31m-    // Create a function that takes a 2D array and a number and returns how many times is n repeated[m
+[31m-    howMuchIsNRepeated(arr,n){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        this.isNotANumber(n);[m
+[31m-        this.isNotPositive(n);[m
+[31m-        let counter = 0;[m
+[31m-        for(let i of arr){[m
+[31m-            for(let j of i){[m
+[31m-                if (j == n){[m
+[31m-                    counter++[m
+[31m-                } [m
+[31m-            }[m
+[31m-        }[m
+[31m-        return counter == 0 ? `${n} is not on the array` : counter[m
+[31m-    }[m
+[31m-    //Exercise 7[m
+[31m-    // Create a function that takes a 2D array and returns the row index of the first instance of the highest number on the array [m
+[31m-    highestIsAtRow(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let index = 0;[m
+[31m-        for(let rIndex in arr){[m
+[31m-            let arrs = arr[rIndex][m
+[31m-            for(let cIndex of arrs){[m
+[31m-                let highestNumber = acc < cIndex && acc != cIndex ;[m
+[31m-                if(highestNumber){[m
+[31m-                    acc = cIndex;[m
+[31m-                    index = Number(rIndex)[m
+[31m-                } [m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {Max: acc, index}[m
+[31m-    }[m
+[31m-    //Exercise 8[m
+[31m-    // Create a function that takes a 2D array and returns the column index of the first instance of the highest number on the array [m
+[31m-    highestIsAtColumn(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let row = 0;[m
+[31m-        let column = 0;[m
+[31m-        for(let rIndex in arr){[m
+[31m-            let arrs = arr[rIndex][m
+[31m-            for(let cIndex in arrs){[m
+[31m-                let number = arrs[cIndex];[m
+[31m-                let highestNumber = acc < number && acc != number ;[m
+[31m-                if(highestNumber){[m
+[31m-                    acc = number;[m
+[31m-                    row = Number(rIndex)[m
+[31m-                    column = Number(cIndex)[m
+[31m-                } [m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {Max: acc, rIndex: row, cIndex: column}[m
+[31m-    }[m
+[31m-    //Exercise 9[m
+[31m-    // Create a function that takes a 2D array and returns the exact position where the highest prime is located at[m
+[31m-    highestPrimeIsAt(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let acc = 0;[m
+[31m-        let row = 0;[m
+[31m-        let column = 0;[m
+[31m-        for(let rIndex in arr){[m
+[31m-            let arrs = arr[rIndex][m
+[31m-            for(let cIndex in arrs){[m
+[31m-                let number = arrs[cIndex];[m
+[31m-                let highestNumber = acc < number && acc != number ;[m
+[31m-                if(highestNumber && this.isPrime(number)){[m
+[31m-                    acc = number;[m
+[31m-                    row = rIndex[m
+[31m-                    column = cIndex[m
+[31m-                } [m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {Max: acc, index: `Row= ${row}, Column= ${column}`}[m
+[31m-    }[m
+[31m-    // Exercise 10[m
+[31m-    // Create a function that takes a 2D array and returns its mode[m
+[31m-    theModeIs(arr){[m
+[31m-        this.isNotAnArray(arr);[m
+[31m-        this.isNotA2DimensionalArray(arr);[m
+[31m-        let obj = {};[m
+[31m-        let acc = 0;[m
+[31m-        let counter = 0;[m
+[31m-        for(let i of arr){[m
+[31m-            for(let j of i){[m
+[31m-                if (!obj[j]){[m
+[31m-                    obj[j] = 1[m
+[31m-                } else {[m
+[31m-                    obj[j] += 1[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[31m-        for (let value in obj){[m
+[31m-            let key = obj[value][m
+[31m-            if (key > acc){[m
+[31m-                acc = Number(value)[m
+[31m-                counter = key[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return {the_mode: acc, isRepeated: counter}[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-export default Functions;[m
+[1mdiff --git a/Algorithms/src/Loops.js b/Algorithms/src/Loops.js[m
+[1mdeleted file mode 100644[m
+[1mindex b379ab0..0000000[m
+[1m--- a/Algorithms/src/Loops.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,315 +0,0 @@[m
+[31m-class Loops{[m
+[31m-    isWhole(n){[m
+[31m-        const isNotDivisibleByOne = n % 1 != 0;[m
+[31m-        if(isNotDivisibleByOne){[m
+[31m-            throw new Error(`Please enter a number that is whole`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-    checkIsNotZero(n){[m
+[31m-        const isZero = n==0;[m
+[31m-        if (isZero){[m
+[31m-            throw new Error(`Please enter a value greater than or lower than 0`)[m
+[31m-        }[m
+[31m-    }[m
+[31m-    checkIsPositive(n){[m
+[31m-        const isNegative = n<0;[m
+[31m-        if(isNegative){[m
+[31m-            throw new Error('Please enter a positive number')[m
+[31m-        }[m
+[31m-    }[m
+[31m-    checkIsTwoDigits(n){[m
+[31m-        const isOneOrMoreThanTwoDigits= n < 9 || n > 100;[m
+[31m-        if (isOneOrMoreThanTwoDigits){[m
+[31m-            throw new Error(`Please enter a 2 digit number`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-    checkIsOneDigit(n){[m
+[31m-        const isMoreThanOneDigit = n > 9 || n < -9;[m
+[31m-        if(isMoreThanOneDigit){[m
+[31m-            throw new Error(`Please enter a 1 digit number`);[m
+[31m-        }[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 1[m
+[31m-    // A method that shows all numbers comprehended between 1 and the number entered[m
+[31m-    allWithin(n){[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let str = '';[m
+[31m-        const isNegative = n<0;[m
+[31m-        if(isNegative){[m
+[31m-            for(let i=-1;i>=n;i--){[m
+[31m-            str += i + " ";[m
+[31m-        }[m
+[31m-        }[m
+[31m-        for(let i=1;i<=n;i++){[m
+[31m-            str += i + " ";[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 2[m
+[31m-    // A method that shows all pair numbers comprehended between 1 and the number entered   [m
+[31m-    allPairsWithin(n){[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let str = '';[m
+[31m-        let i= 0;[m
+[31m-        const isNegative = n<0;[m
+[31m-        if(isNegative){[m
+[31m-            for(i=-1;i>=n;i--){[m
+[31m-                const isDivisibleByTwo = i%2==0;[m
+[31m-                if(isDivisibleByTwo){[m
+[31m-                    str += i +' ';[m
+[31m-                }[m
+[31m-        }[m
+[31m-    }[m
+[31m-        for(i=1;i<=n;i++){[m
+[31m-            const isDivisibleByTwo = i%2==0;[m
+[31m-            if(isDivisibleByTwo){[m
+[31m-                str += i +' ';[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-    [m
+[31m-    // Exercise 3[m
+[31m-    // A method that shows all divisor comprehended between 1 and the number entered   [m
+[31m-    allDivisor(n){[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let str = ''[m
+[31m-        const isNegative = n<0;[m
+[31m-        if(isNegative){[m
+[31m-            for(let i=-1;i>=n;i--){[m
+[31m-                const NumisDivisibleByNumsWithin= n%i==0;[m
+[31m-                if (NumisDivisibleByNumsWithin){[m
+[31m-                str += i + " ";[m
+[31m-            }[m
+[31m-        }[m
+[31m-    }[m
+[31m-        for(let i=1;i<=n;i++){[m
+[31m-            const NumisDivisibleByNumsWithin= n%i==0;[m
+[31m-            if (NumisDivisibleByNumsWithin){[m
+[31m-                str += i + " ";[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-[m
+[31m-    /*[m
+[31m-    ===================[m
+[31m-    I stopped here. Continue here [m
+[31m-    ===================[m
+[31m-    */[m
+[31m-[m
+[31m-    // Exercise 4[m
+[31m-    // A method that reads a 2 and 3 digit number. It goes over each digit and shows all isWhole numbers comprehended between 1 and the number entered  [m
+[31m-    allWithinEachDigit(n){[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        const numbersAreTwoOrThreeDigits = n < 1000 && n > 10 || n > -1000 && n < -10 ;[m
+[31m-        if (numbersAreTwoOrThreeDigits){[m
+[31m-            let currDigit;[m
+[31m-            let str = ' ';[m
+[31m-            while(n<-1){[m
+[31m-                currDigit = n%10;[m
+[31m-                n = Math.ceil(n/10);[m
+[31m-                    for(let i=-1;i>=currDigit;i--){[m
+[31m-                        str += i + " ";[m
+[31m-                    }[m
+[31m-                str +='// ';[m
+[31m-            }[m
+[31m-            while(n>1){[m
+[31m-                currDigit = n%10;[m
+[31m-                n = Math.floor(n/10);[m
+[31m-                for(let i=1;i<=currDigit;i++){[m
+[31m-                    str += i + " ";[m
+[31m-                }[m
+[31m-                str +='// '[m
+[31m-            }[m
+[31m-            return str.trim();[m
+[31m-        }  else {[m
+[31m-            throw new Error(`Please enter a 2 or 3 digit number`);[m
+[31m-        } [m
+[31m-    }[m
+[31m-    // Exercise 5[m
+[31m-    // A method that takes a 2 digit number and shows all isWhole numbers which finish in 4 comprehended between 1 and the number entered  [m
+[31m-    allFours(n){[m
+[31m-        if(n<0){[m
+[31m-            n *= -1[m
+[31m-        }[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        this.checkIsTwoDigits(n);  [m
+[31m-        let str = '';[m
+[31m-        for(let i=0;i<n;i++){[m
+[31m-            if(i%10==4){[m
+[31m-                str += i + " ";[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 6[m
+[31m-    // A method that shows all numbers comprehended between 20 and the 200  [m
+[31m-    twentyTo200(){[m
+[31m-        let str = '';[m
+[31m-        for(let i=20; i<=200;i+=2){[m
+[31m-            str += i +" ";[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-    [m
+[31m-    // Exercise 7[m
+[31m-    // A method that shows all numbers that end in 6 comprehended between 25 and the 205[m
+[31m-    hasSix(){[m
+[31m-        let str ='';[m
+[31m-        for(let i=25;i<205;i++){[m
+[31m-            if(i%10==6){[m
+[31m-                str += i +" ";[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-    [m
+[31m-    // Exercise 8[m
+[31m-    // A method that takes a one digit number and shows the sum of numbers comprehended between 1 and the number entered   [m
+[31m-    sumOfAllWithin(n){[m
+[31m-        if(n<0){[m
+[31m-            n *= -1[m
+[31m-        }[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsOneDigit(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let total = 0;[m
+[31m-        for(let i=0;i<=n;i++){[m
+[31m-            total += i;[m
+[31m-        }[m
+[31m-        return total;[m
+[31m-    }[m
+[31m-    // Exercise 9 [m
+[31m-    // A method that takes a 2 digit number and shows all numbers comprehended between one of its digits and another of its digits   [m
+[31m-    betweenDigits(n){[m
+[31m-        if(n<0){[m
+[31m-            n *= -1;[m
+[31m-        }[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        this.checkIsTwoDigits(n);[m
+[31m-        let firstDigit= ~~(n/10)[m
+[31m-        let lastDigit= n%10;[m
+[31m-        if (lastDigit<firstDigit){[m
+[31m-            [lastDigit, firstDigit]=[firstDigit, lastDigit][m
+[31m-        } else if(lastDigit == firstDigit){[m
+[31m-            return 'Both digits are the same';[m
+[31m-        }[m
+[31m-        let str = '';[m
+[31m-        for(let i=firstDigit;i<=lastDigit;i++){[m
+[31m-            str += i + " ";[m
+[31m-        }[m
+[31m-        return str.trim()[m
+[31m-    }[m
+[31m-    [m
+[31m-    // Exercise 10[m
+[31m-    // A method that determines if a number lower than four digit has the num 1      [m
+[31m-    hasOne(n){[m
+[31m-        if(n<0){[m
+[31m-            n *= -1[m
+[31m-        }[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        if(n>1000){[m
+[31m-            throw new Error(`Please enter a number with less than 4 digits`);[m
+[31m-        }[m
+[31m-        let digit = 0;[m
+[31m-        while(n>1){[m
+[31m-            digit = ~~(n%10);[m
+[31m-            n/=10;[m
+[31m-            if(digit == 1){[m
+[31m-                console.log(`I'm the one`);[m
+[31m-                return true;[m
+[31m-            }[m
+[31m-        }[m
+[31m-        console.log(`I'm not the one`);[m
+[31m-        return false[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 11[m
+[31m-    // A method that shows all the multiples of 5 comprehended between 1 and the given number  [m
+[31m-    multipleOfFive(n){[m
+[31m-        if(n<0){[m
+[31m-            n *= -1[m
+[31m-        }[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let str = '';[m
+[31m-        for(let i=1;i<n;i++){[m
+[31m-            if(i%5==0){[m
+[31m-                str += i + ' '; [m
+[31m-            }[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 12[m
+[31m-    // A method that shows the first 20 multiples of 3[m
+[31m-    multipleOfThree(){[m
+[31m-        let str = '';[m
+[31m-        for(let i=1;i<=20;i++){[m
+[31m-            str += (i*3) + ' ';[m
+[31m-        }[m
+[31m-        return str.trim();[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 13[m
+[31m-    // A method that shows the sum total of the first 20 multiples of 3[m
+[31m-    sumMultipleOfThree(){[m
+[31m-        let total = 0;[m
+[31m-        for(let i=1;i<=20;i++){[m
+[31m-            total +=(i*3);[m
+[31m-        }[m
+[31m-        return total;[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 14[m
+[31m-    // A method that shows the average between n given number of multiples of 3[m
+[31m-    averageOfThree(n){[m
+[31m-        this.checkIsPositive(n);[m
+[31m-        this.isWhole(n);[m
+[31m-        this.checkIsNotZero(n);[m
+[31m-        let total = 0;[m
+[31m-        let average = 0;[m
+[31m-        for(let i=1;i<=n;i++){[m
+[31m-            total +=(i*3);[m
+[31m-        }[m
+[31m-        average = total / n;[m
+[31m-        return average;[m
+[31m-    }[m
+[31m-[m
+[31m-    // Exercise 15 [m
+[31m-    // shows the average of the first X number multiples of 2 and determine if the average is greater than the average of the first Y numbers multiples of 5[m
+[31m-    isAverageOf2Greater(x,y){[m
+[31m-        this.checkIsPositive(x);[m
+[31m-        this.checkIsPositive(y);[m
+[31m-        this.isWhole(x);[m
+[31m-        this.isWhole(y);[m
+[31m-        this.checkIsNotZero(x);[m
+[31m-        this.checkIsNotZero(y);[m
+[31m-        let averageX=0;[m
+[31m-        let averageY=0;[m
+[31m-        let totalX=0;[m
+[31m-        let totalY=0;[m
+[31m-        for(let i=1;i<=x;i++){[m
+[31m-            totalX += (i*2);[m
+[31m-        }[m
+[31m-        for(let j=1;j<=y;j++){[m
+[31m-            totalY += (j*5);[m
+[31m-        }[m
+[31m-        averageX = totalX/x;[m
+[31m-        averageY = totalY/y;[m
+[31m-        return averageX>averageY;[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-export default Loops;[m
+[1mdiff --git a/Algorithms/src/index.html b/Algorithms/src/index.html[m
+[1mdeleted file mode 100644[m
+[1mindex 48acc0d..0000000[m
+[1m--- a/Algorithms/src/index.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html lang="en">[m
+[31m-<head>[m
+[31m-    <meta charset="UTF-8">[m
+[31m-    <meta http-equiv="X-UA-Compatible" content="IE=edge">[m
+[31m-    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[31m-    <title>testing</title>[m
+[31m-</head>[m
+[31m-<body>[m
+[31m-    [m
+[31m-    <script type= "module" src="./chapter7.js"></script>[m
+[31m-</body>[m
+[31m-</html>[m
+\ No newline at end of file[m
